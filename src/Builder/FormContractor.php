@@ -100,7 +100,6 @@ class FormContractor implements FormContractorInterface
 
         if ($this->checkFormClass($type, [
             ModelType::class,
-            ModelTypeList::class,
             ModelListType::class,
             ModelHiddenType::class,
             ModelAutocompleteType::class,
@@ -158,6 +157,7 @@ class FormContractor implements FormContractorInterface
                 return $fieldDescription->getAssociationAdmin()->getNewInstance();
             };
             $fieldDescription->setOption('edit', $fieldDescription->getOption('edit', 'admin'));
+        } elseif ($this->checkFormClass($type, [CollectionType::class])) {
         // NEXT_MAJOR: remove 'Sonata\CoreBundle\Form\Type\CollectionType'
         } elseif ($this->checkFormClass($type, [CollectionType::class, 'Sonata\CoreBundle\Form\Type\CollectionType'])) {
             if (!$fieldDescription->getAssociationAdmin()) {
