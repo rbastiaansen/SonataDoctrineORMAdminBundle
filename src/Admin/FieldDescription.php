@@ -20,6 +20,7 @@ class FieldDescription extends BaseFieldDescription
     public function __construct()
     {
         $this->parentAssociationMappings = [];
+        $this->fieldMapping = [];
     }
 
     public function setAssociationMapping($associationMapping): void
@@ -40,7 +41,7 @@ class FieldDescription extends BaseFieldDescription
      *
      * @deprecated since sonata-project/doctrine-orm-admin-bundle 3.20 and will be removed in version 4.0. Use FieldDescription::getTargetModel() instead.
      */
-    public function getTargetEntity()
+    public function getTargetEntity(): ?string
     {
         @trigger_error(sprintf(
             'Method %s() is deprecated since sonata-project/doctrine-orm-admin-bundle 3.20 and will be removed in version 4.0.'
@@ -88,7 +89,7 @@ class FieldDescription extends BaseFieldDescription
         $this->parentAssociationMappings = $parentAssociationMappings;
     }
 
-    public function isIdentifier()
+    public function isIdentifier(): bool
     {
         return isset($this->fieldMapping['id']) ? $this->fieldMapping['id'] : false;
     }

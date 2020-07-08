@@ -68,32 +68,6 @@ class StringFilterTest extends TestCase
         $this->assertTrue($filter->isActive());
     }
 
-    public function testStartsWith(): void
-    {
-        $filter = new StringFilter();
-        $filter->initialize('field_name', ['format' => '%s']);
-
-        $builder = new ProxyQuery(new QueryBuilder());
-        $this->assertSame([], $builder->query);
-
-        $filter->filter($builder, 'alias', 'field', ['value' => 'asd', 'type' => StringOperatorType::TYPE_STARTS_WITH]);
-        $this->assertSame(['alias.field LIKE :field_name_0'], $builder->query);
-        $this->assertSame(['field_name_0' => 'asd%'], $builder->parameters);
-    }
-
-    public function testEndsWith(): void
-    {
-        $filter = new StringFilter();
-        $filter->initialize('field_name', ['format' => '%s']);
-
-        $builder = new ProxyQuery(new QueryBuilder());
-        $this->assertSame([], $builder->query);
-
-        $filter->filter($builder, 'alias', 'field', ['value' => 'asd', 'type' => StringOperatorType::TYPE_ENDS_WITH]);
-        $this->assertSame(['alias.field LIKE :field_name_0'], $builder->query);
-        $this->assertSame(['field_name_0' => '%asd'], $builder->parameters);
-    }
-
     public function testNotContains(): void
     {
         $filter = new StringFilter();
