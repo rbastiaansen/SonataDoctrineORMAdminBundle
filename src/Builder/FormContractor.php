@@ -26,6 +26,7 @@ use Sonata\AdminBundle\Form\Type\ModelTypeList;
 use Sonata\Form\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class FormContractor implements FormContractorInterface
 {
@@ -88,19 +89,18 @@ class FormContractor implements FormContractorInterface
         return $this->formFactory;
     }
 
-    public function getFormBuilder($name, array $options = [])
+    public function getFormBuilder($name, array $options = []): FormBuilderInterface
     {
         return $this->getFormFactory()->createNamedBuilder($name, FormType::class, null, $options);
     }
 
-    public function getDefaultOptions($type, FieldDescriptionInterface $fieldDescription)
+    public function getDefaultOptions($type, FieldDescriptionInterface $fieldDescription): array
     {
         $options = [];
         $options['sonata_field_description'] = $fieldDescription;
 
         if ($this->checkFormClass($type, [
             ModelType::class,
-            ModelTypeList::class,
             ModelListType::class,
             ModelHiddenType::class,
             ModelAutocompleteType::class,
@@ -158,6 +158,7 @@ class FormContractor implements FormContractorInterface
                 return $fieldDescription->getAssociationAdmin()->getNewInstance();
             };
             $fieldDescription->setOption('edit', $fieldDescription->getOption('edit', 'admin'));
+        } elseif ($this->checkFormClass($type, [CollectionType::class])) {
         // NEXT_MAJOR: remove 'Sonata\CoreBundle\Form\Type\CollectionType'
         } elseif ($this->checkFormClass($type, [CollectionType::class, 'Sonata\CoreBundle\Form\Type\CollectionType'])) {
             if (!$fieldDescription->getAssociationAdmin()) {

@@ -42,7 +42,7 @@ class ListBuilder implements ListBuilderInterface
         $this->templates = $templates;
     }
 
-    public function getBaseList(array $options = [])
+    public function getBaseList(array $options = []): FieldDescriptionCollection
     {
         return new FieldDescriptionCollection();
     }
@@ -113,7 +113,11 @@ class ListBuilder implements ListBuilderInterface
         $fieldDescription->setOption('label', $fieldDescription->getOption('label', $fieldDescription->getName()));
 
         if (!$fieldDescription->getTemplate()) {
-            $fieldDescription->setTemplate($this->getTemplate($fieldDescription->getType()));
+            $template = $this->getTemplate($fieldDescription->getType());
+
+            if ($template) {
+                $fieldDescription->setTemplate($this->getTemplate($fieldDescription->getType()));
+            }
 
             if (!$fieldDescription->getTemplate()) {
                 switch ($fieldDescription->getMappingType()) {
