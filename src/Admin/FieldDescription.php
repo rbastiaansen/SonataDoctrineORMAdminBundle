@@ -112,4 +112,14 @@ class FieldDescription extends BaseFieldDescription
 
         return $this->getFieldValue($object, $this->fieldName);
     }
+
+    public function getType(): ?string
+    {
+        return $this->type ? (string)$this->type : null;
+    }
+
+    public function getHelp(): string
+    {
+        return $this->help ?? '';
+    }
 }
