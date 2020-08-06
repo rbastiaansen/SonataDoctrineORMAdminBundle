@@ -51,20 +51,16 @@ class TypeGuesser extends AbstractTypeGuesser
 
             switch ($mapping['type']) {
                 case ClassMetadata::ONE_TO_MANY:
-                    // NEXT_MAJOR: return new TypeGuess(TemplateRegistry::TYPE_ONE_TO_MANY, [], Guess::HIGH_CONFIDENCE)
-                    return new TypeGuess('orm_one_to_many', [], Guess::HIGH_CONFIDENCE);
+                    return new TypeGuess(TemplateRegistry::TYPE_ONE_TO_MANY, [], Guess::HIGH_CONFIDENCE);
 
                 case ClassMetadata::MANY_TO_MANY:
-                    // NEXT_MAJOR: return new TypeGuess(TemplateRegistry::TYPE_MANY_TO_MANY, [], Guess::HIGH_CONFIDENCE)
-                    return new TypeGuess('orm_many_to_many', [], Guess::HIGH_CONFIDENCE);
+                    return new TypeGuess(TemplateRegistry::TYPE_MANY_TO_MANY, [], Guess::HIGH_CONFIDENCE);
 
                 case ClassMetadata::MANY_TO_ONE:
-                    // NEXT_MAJOR: return new TypeGuess(TemplateRegistry::TYPE_MANY_TO_ONE, [], Guess::HIGH_CONFIDENCE)
-                    return new TypeGuess('orm_many_to_one', [], Guess::HIGH_CONFIDENCE);
+                    return new TypeGuess(TemplateRegistry::TYPE_MANY_TO_ONE, [], Guess::HIGH_CONFIDENCE);
 
                 case ClassMetadata::ONE_TO_ONE:
-                    // NEXT_MAJOR: return new TypeGuess(TemplateRegistry::TYPE_ONE_TO_ONE, [], Guess::HIGH_CONFIDENCE)
-                    return new TypeGuess('orm_one_to_one', [], Guess::HIGH_CONFIDENCE);
+                    return new TypeGuess(TemplateRegistry::TYPE_ONE_TO_ONE, [], Guess::HIGH_CONFIDENCE);
             }
         }
 
