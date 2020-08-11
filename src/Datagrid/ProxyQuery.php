@@ -227,7 +227,7 @@ class ProxyQuery implements ProxyQueryInterface
         return $query->execute($params, $hydrationMode);
     }
 
-    public function setSortBy($parentAssociationMappings, $fieldMapping)
+    public function setSortBy($parentAssociationMappings, $fieldMapping): ProxyQueryInterface
     {
         $alias = $this->entityJoin($parentAssociationMappings);
         $this->sortBy = $alias.'.'.$fieldMapping['fieldName'];
@@ -235,12 +235,12 @@ class ProxyQuery implements ProxyQueryInterface
         return $this;
     }
 
-    public function getSortBy()
+    public function getSortBy(): string
     {
-        return $this->sortBy;
+        return $this->sortBy ?? '';
     }
 
-    public function setSortOrder($sortOrder)
+    public function setSortOrder($sortOrder): ProxyQueryInterface
     {
         if (!\in_array(strtoupper($sortOrder), $validSortOrders = ['ASC', 'DESC'], true)) {
             throw new \InvalidArgumentException(sprintf(
@@ -254,12 +254,12 @@ class ProxyQuery implements ProxyQueryInterface
         return $this;
     }
 
-    public function getSortOrder()
+    public function getSortOrder(): string
     {
-        return $this->sortOrder;
+        return $this->sortOrder ?? 'DESC';
     }
 
-    public function getSingleScalarResult()
+    public function getSingleScalarResult(): ?int
     {
         $query = $this->queryBuilder->getQuery();
 
@@ -269,41 +269,41 @@ class ProxyQuery implements ProxyQueryInterface
     /**
      * @return QueryBuilder
      */
-    public function getQueryBuilder()
+    public function getQueryBuilder(): QueryBuilder
     {
         return $this->queryBuilder;
     }
 
-    public function setFirstResult($firstResult)
+    public function setFirstResult($firstResult): ProxyQueryInterface
     {
         $this->queryBuilder->setFirstResult($firstResult);
 
         return $this;
     }
 
-    public function getFirstResult()
+    public function getFirstResult(): ?object
     {
         return $this->queryBuilder->getFirstResult();
     }
 
-    public function setMaxResults($maxResults)
+    public function setMaxResults($maxResults): ProxyQueryInterface
     {
         $this->queryBuilder->setMaxResults($maxResults);
 
         return $this;
     }
 
-    public function getMaxResults()
+    public function getMaxResults(): int
     {
         return $this->queryBuilder->getMaxResults();
     }
 
-    public function getUniqueParameterId()
+    public function getUniqueParameterId(): int
     {
         return $this->uniqueParameterId++;
     }
 
-    public function entityJoin(array $associationMappings)
+    public function entityJoin(array $associationMappings): string
     {
         $alias = current($this->queryBuilder->getRootAliases());
 

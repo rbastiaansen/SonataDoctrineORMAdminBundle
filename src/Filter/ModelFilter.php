@@ -39,7 +39,7 @@ class ModelFilter extends Filter
         $this->handleMultiple($queryBuilder, $alias, $data);
     }
 
-    public function getDefaultOptions()
+    public function getDefaultOptions(): array
     {
         return [
             'mapping_type' => false,
@@ -51,7 +51,7 @@ class ModelFilter extends Filter
         ];
     }
 
-    public function getRenderSettings()
+    public function getRenderSettings(): array
     {
         return [DefaultType::class, [
             'field_type' => $this->getFieldType(),

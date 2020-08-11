@@ -78,7 +78,7 @@ class StringFilter extends Filter
         }
     }
 
-    public function getDefaultOptions()
+    public function getDefaultOptions(): array
     {
         return [
             'format' => '%%%s%%',
@@ -86,7 +86,7 @@ class StringFilter extends Filter
         ];
     }
 
-    public function getRenderSettings()
+    public function getRenderSettings(): array
     {
         return [ChoiceType::class, [
             'field_type' => $this->getFieldType(),
@@ -100,7 +100,7 @@ class StringFilter extends Filter
      *
      * @return bool
      */
-    private function getOperator($type)
+    private function getOperator($type): bool
     {
         return self::CHOICES[$type] ?? false;
     }

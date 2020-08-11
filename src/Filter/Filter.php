@@ -34,7 +34,7 @@ abstract class Filter extends BaseFilter
         }
     }
 
-    public function isActive()
+    public function isActive(): bool
     {
         return $this->active;
     }
